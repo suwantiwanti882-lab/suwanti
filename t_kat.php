@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-
+$page = basename($_SERVER['PHP_SELF']);
 $auto = mysqli_query($conn, "select max(kd_kat) as max_code from categories");
 $hasil = mysqli_fetch_array($auto);
 $code = $hasil['max_code'];
@@ -26,6 +26,7 @@ if (isset($_POST['simpan'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

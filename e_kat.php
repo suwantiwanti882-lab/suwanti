@@ -1,4 +1,37 @@
-<?php $page = basename($_SERVER['PHP_SELF']); ?>
+<?php
+include "koneksi.php";
+
+$page = basename($_SERVER['PHP_SELF']);
+
+$id = $_GET['id'];
+
+$query = mysqli_query($conn, "SELECT * FROM categories WHERE kd_kat='$id'");
+
+if(!$query){
+    die(mysqli_error($conn));
+}
+
+$hasil = mysqli_fetch_array($query);
+
+if(isset($_POST['update'])){
+
+    $kd_kat = $_POST['kd_kat'];
+    $nm_kat = $_POST['nm_kat'];
+
+    $update = mysqli_query($conn,
+    "UPDATE categories
+    SET category_name='$nm_kat'
+    WHERE kd_kat='$kd_kat'");
+
+    if($update){
+        echo "<script>alert('Data berhasil diupdate!')</script>";
+        header("Location: kategori_produk.php");
+        exit;
+    } else {
+        echo "<script>alert('Data gagal diupdate!')</script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +63,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -48,16 +80,14 @@
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>SUWANTI</h6>
+                            <h6>Kevin Anderson</h6>
                             <span>Web Designer</span>
                         </li>
                         <li>
@@ -111,49 +141,45 @@
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
+
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <!-- Dashboard -->
             <li class="nav-item">
-                <a class="nav-link <?= ($page == 'index.php') ? '' : 'collapsed' ?>" href="index.php">
-                    <i class="bi bi-house-fill"></i>
+                <a class="nav-link collapsed" href="index.php">
+                    <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
-            </li>
+            </li><!-- End Dashboard Nav -->
 
-            <!-- Kategori Produk -->
             <li class="nav-item">
-                <a class="nav-link <?= ($page == 'kategori_produk.php') ? '' : 'collapsed' ?>" href="kategori_produk.php">
-                    <i class="bi bi-cart4"></i>
+                <a class="nav-link collapsed" href="kategori_produk.php">
+                    <i class="bi bi-person"></i>
                     <span>Kategori Produk</span>
                 </a>
-            </li>
+            </li><!-- End Profile Page Nav -->
 
-            <!-- Data Produk -->
             <li class="nav-item">
-                <a class="nav-link <?= ($page == 'produk.php') ? '' : 'collapsed' ?>" href="produk.php">
-                    <i class="bi bi-book"></i>
-                    <span>Data Produk</span>
+                <a class="nav-link collapsed" href="produk.php">
+                    <i class="bi bi-question-circle"></i>
+                    <span>Data_Produk</span>
                 </a>
-            </li>
+            </li><!-- End F.A.Q Page Nav -->
 
-            <!-- Laporan -->
             <li class="nav-item">
-                <a class="nav-link <?= ($page == 'laporan.php') ? '' : 'collapsed' ?>" href="laporan.php">
-                    <i class="bi bi-journals"></i>
+                <a class="nav-link collapsed" href="laporan.php">
+                    <i class="bi bi-envelope"></i>
                     <span>Laporan</span>
                 </a>
-            </li>
+            </li><!-- End Contact Page Nav -->
 
-            <!-- Manajemen User -->
             <li class="nav-item">
-                <a class="nav-link <?= ($page == 'user.php') ? '' : 'collapsed' ?>" href="user.php">
-                    <i class="bi bi-person-bounding-box"></i>
+                <a class="nav-link collapsed" href="users.php">
+                    <i class="bi bi-card-list"></i>
                     <span>Manajemen User</span>
                 </a>
-            </li>
-
+            </li><!-- End Register Page Nav -->
         </ul>
+
     </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
@@ -163,65 +189,39 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-
-                    <li class="breadcrumb-item active">Kategori Produk</li>
+                    <li class="breadcrumb-item">Kategori Produk</li>
+                    <li class="breadcrumb-item active">Edit</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-        <div class="row">
-            <div class="col-lg-12">
-
-                <div class="card">
-                    <div class="card-body mt-3">
-                        <a href="t_kat.php" class="btn btn-primary">Tambah Data</a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <section class="section">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
 
                     <div class="card">
-                        <div class="card-body mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Vertical Form</h5>
 
-
-                            <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode Kategori</th>
-                                        <th scope="col">Kategori Produk</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                
-                                    <?php
-                                    include "koneksi.php";
-                                    $no = 1;
-                                    $sql = mysqli_query($conn, "SELECT * FROM categories");
-                                    while ($data = mysqli_fetch_array($sql)) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?php echo $data['kd_kat']; ?></td>
-                                            <td><?php echo $data['category_name']; ?></td>
-                                            <td>
-                                                <a href="e_kat.php?id=<?php echo $data['kd_kat']; ?>" class="btn btn-warning">Edit</a>
-                                                <a href="h_kat.php?id=<?php echo $data['kd_kat']; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data?')">Hapus</a>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
+                            <!-- Vertical Form -->
+                            <form class="row g-3" method="POST">
+                                <div class="col-12">
+                                    <label for="inputNanme4" class="form-label">Kode Kategori</label>
+                                    <input type="text" class="form-control" id="kd_kat" name="kd_kat" value="<?php echo $hasil ['kd_kat']; ?>" readonly>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputEmail4" class="form-label">Nama Kategori</label>
+                                    <input type="text" class="form-control" id="nm_kat" name="nm_kat" value="<?php echo $hasil ['category_name']; ?>" required>
+                                </div>
+                            
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-warning"><a href="kategori_produk.php" style="color: black; text-decoration: none;">Kembali</a></button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                    <button type="submit" class="btn btn-success" name="update">Update</button>
+                                </div>
+                            </form><!-- Vertical Form -->
 
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -231,14 +231,10 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Nama Sistem</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="">Nama Kalian</a>
         </div>
     </footer><!-- End Footer -->
 
