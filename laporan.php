@@ -1,6 +1,5 @@
 <?php 
 include 'koneksi.php';
-$page = basename($_SERVER['PHP_SELF']); 
 
 // total stok
 $total_item = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM products"));
@@ -135,51 +134,46 @@ $total_stok_kritis = mysqli_num_rows(mysqli_query(
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-  <ul class="sidebar-nav" id="sidebar-nav">
+   <aside id="sidebar" class="sidebar">
 
-    <!-- Dashboard -->
-    <li class="nav-item">
-      <a class="nav-link <?= ($page == 'index.php') ? '' : 'collapsed' ?>" href="index.php">
-        <i class="bi bi-house-fill"></i>
-        <span>Dashboard</span>
-      </a>
-    </li>
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-    <!-- Kategori Produk -->
-    <li class="nav-item">
-      <a class="nav-link <?= ($page == 'kategori_produk.php') ? '' : 'collapsed' ?>" href="kategori_produk.php">
-        <i class="bi bi-cart4"></i>
-        <span>Kategori Produk</span>
-      </a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-house-fill"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="kategori_produk.php">
+         <i class="bi bi-cart4"></i>
+          <span>Kategori Produk</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
 
-    <!-- Data Produk -->
-    <li class="nav-item">
-      <a class="nav-link <?= ($page == 'produk.php') ? '' : 'collapsed' ?>" href="produk.php">
-        <i class="bi bi-book"></i>
-        <span>Data Produk</span>
-      </a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="produk.php">
+         <i class="bi bi-book"></i>
+          <span>Data Produk</span>
+        </a>
+      </li><!-- End Data Produk Page Nav -->
 
-    <!-- Laporan -->
-    <li class="nav-item">
-      <a class="nav-link <?= ($page == 'laporan.php') ? '' : 'collapsed' ?>" href="laporan.php">
-       <i class="bi bi-journals"></i>
-        <span>Laporan</span>
-      </a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link " href="laporan.php">
+          <i class="bi bi-journals"></i>
+          <span>Laporan</span>
+        </a>
+      </li><!-- End Laporan Page Nav -->
 
-    <!-- Manajemen User -->
-    <li class="nav-item">
-      <a class="nav-link <?= ($page == 'user.php') ? '' : 'collapsed' ?>" href="user.php">
-        <i class="bi bi-person-bounding-box"></i>
-        <span>Manajemen User</span>
-      </a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="user.php">
+          <i class="bi bi-person-bounding-box"></i>
+          <span>Manajemen User</span>
+        </a>
+      </li><!-- End Register Page Nav -->
+    </ul>
 
-  </ul>
-</aside><!-- End Sidebar-->
+  </aside><!-- End Sidebar-->
 
  <main id="main" class="main">
 
