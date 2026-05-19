@@ -31,7 +31,7 @@ $data = query("
         p.gambar,
         p.created_at
     FROM products p
-    JOIN categories c ON p.category_id = c.id
+    LEFT JOIN categories c ON p.category_id = c.id
     ORDER BY p.product_name ASC
 ");
 
