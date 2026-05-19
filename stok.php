@@ -1,7 +1,11 @@
 <?php
 session_start();
 include "koneksi.php";
-
+// Cek apakah user sudah login
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
 // Cek apakah user sudah login
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
