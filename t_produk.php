@@ -107,7 +107,7 @@ if (isset($_POST['simpan'])) {
                         data-bs-toggle="dropdown">
 
                         <img
-                            src="assets/img/profile-img.jpg"
+                            src="assets/img/1.jpg"
                             alt="Profile"
                             class="rounded-circle" />
 

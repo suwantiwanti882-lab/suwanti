@@ -1,11 +1,12 @@
 <?php 
 session_start();
-include 'koneksi.php';
-// Cek apakah user sudah login
+
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }
+
+include "koneksi.php";
 // total stok
 $total_item = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM products"));
 // Total transaksi barang masuk
@@ -84,7 +85,7 @@ $total_stok_kritis = mysqli_num_rows(mysqli_query(
                         data-bs-toggle="dropdown">
 
                         <img
-                            src="assets/img/profile-img.jpg"
+                            src="assets/img/1.jpg"
                             alt="Profile"
                             class="rounded-circle" />
 

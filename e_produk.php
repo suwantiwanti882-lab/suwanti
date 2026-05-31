@@ -122,7 +122,7 @@ if (isset($_POST['update'])) {
                         data-bs-toggle="dropdown">
 
                         <img
-                            src="assets/img/profile-img.jpg"
+                            src="assets/img/1.jpg"
                             alt="Profile"
                             class="rounded-circle" />
 

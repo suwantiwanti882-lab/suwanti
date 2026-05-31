@@ -1,12 +1,12 @@
 <?php
 session_start();
-include "koneksi.php";
 
-// Cek apakah user sudah login
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }
+
+include "koneksi.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +65,7 @@ if (!isset($_SESSION['login'])) {
                         data-bs-toggle="dropdown">
 
                         <img
-                            src="assets/img/profile-img.jpg"
+                            src="assets/img/1.jpg"
                             alt="Profile"
                             class="rounded-circle" />
 
